@@ -42,17 +42,19 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     msg = event.message.text #message from user
-    for i in range(10):
-         # 針對使用者各種訊息的回覆 Start =========
-        line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=msg))
+
+    profile = line_bot_api.get_profile(event.source.user_id)
+    
+    single_push(profile.user_id, 'hi')
 
    
 
     # 針對使用者各種訊息的回覆 End =========
 
 # ================= 機器人區塊 End =================
+
+def single_push(id, msg):
+    line_bot_api.push_message(id, TextSendMessage(text=msg))
 
 import os
 if __name__ == "__main__":
