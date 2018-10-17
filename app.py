@@ -45,7 +45,7 @@ def handle_text_message(event):                  # default
 
     profile = line_bot_api.get_profile(event.source.user_id)
     for i in range(10):
-        single_push(profile.user_id, 'hi')
+        single_push(profile.user_id, 'msg'+'笑妳')
 
    
 
