@@ -42,11 +42,13 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)  # default
 def handle_text_message(event):                  # default
     msg = event.message.text #message from user
-
-    # 針對使用者各種訊息的回覆 Start =========
-    line_bot_api.reply_message(
+    for i in range(10):
+         # 針對使用者各種訊息的回覆 Start =========
+        line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=msg))
+
+   
 
     # 針對使用者各種訊息的回覆 End =========
 
