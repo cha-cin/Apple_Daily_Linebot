@@ -45,7 +45,11 @@ def handle_text_message(event):                  # default
     
     profile = line_bot_api.get_profile(event.source.user_id)
     title = apple_crawd_now()
-    single_push(profile.user_id, title[0])
+    for i in range(5):
+        single_push(profile.user_id,title[i])
+
+        
+    
     # single_push(profile.user_id, "test")
 
    
