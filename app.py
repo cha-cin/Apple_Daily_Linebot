@@ -44,7 +44,7 @@ def handle_text_message(event):                  # default
     msg = event.message.text #message from user
     title = apple_crawd_now()
     profile = line_bot_api.get_profile(event.source.user_id)
-    single_push(profile.user_id, title)
+    single_push(profile.user_id, "test")
 
    
 
