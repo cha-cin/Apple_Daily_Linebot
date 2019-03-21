@@ -1,6 +1,6 @@
 # encoding: utf-8
 from flask import Flask, request, abort
-from apple_crawd import apple_crawd_now
+import apple_crawd
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -44,9 +44,11 @@ def handle_text_message(event):                  # default
     msg = event.message.text #message from user
     
     profile = line_bot_api.get_profile(event.source.user_id)
-    title = apple_crawd_now()
+    social_title = apple_crawd.return_social_title()
+    social_href = apple_crawd.return_social_href()
  
-    single_push(profile.user_id,title)
+    single_push(profile.user_id,social_title)
+    single_push(profile.user_id,social_href)
 
         
     

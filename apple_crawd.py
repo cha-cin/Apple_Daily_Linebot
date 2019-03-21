@@ -27,7 +27,7 @@ count=0
 
 local_title_list=[]
 local_content_list=[]
-local_href_dictionary = {}
+local_href_list = []
 local_political_title_list = []
 local_political_content_list = []
 local_entertainment_title_list=[]
@@ -56,7 +56,7 @@ while count<=1:
             b = b[4:6]
             if b == "社會":
                 href="https://tw.news."+news_list.a['href'].strip("/")[16:]
-#                print(href)
+                local_href_list.append(href)
                 html2 = urlopen(href)
 
                 #去除廣告
@@ -68,66 +68,64 @@ while count<=1:
                 for i in bsObj.findAll("article"):
                     # print(i)
                     if i.h1 != None:
-                        # local_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
-                        
-                        local_href_dictionary = {i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""),href}             
+                        local_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
                 title_count+=1
-            elif b == "政治":
-                alternative = news_list.a['href'].strip("/")[16:]
-                print(alternative)
-                href="https://tw.news." + alternative
+#             elif b == "政治":
+#                 alternative = news_list.a['href'].strip("/")[16:]
+#                 print(alternative)
+#                 href="https://tw.news." + alternative
                 
-#                print(href)
-                html2 = urlopen(href)
+# #                print(href)
+#                 html2 = urlopen(href)
 
-                #去除廣告
-                # ad_clear('//div[@id="tenmax-cover-shrink"]')
-                bsObj = BeautifulSoup(html2, 'html.parser')
-                # print(bsObj)
+#                 #去除廣告
+#                 # ad_clear('//div[@id="tenmax-cover-shrink"]')
+#                 bsObj = BeautifulSoup(html2, 'html.parser')
+#                 # print(bsObj)
                 
-                #找title ,content丟入list中
-                for i in bsObj.findAll("article"):
-                    # print(i)
-                    if i.h1 != None:
-                        local_political_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
-#                        print(local_political_title_list)
-                        print("\n\n")
-                #scraping content
-                for i in bsObj.findAll("div",{'class':'ndArticle_margin'}):
-                    if i.p!=None:
-                        local_political_content_list.append(i.p.get_text().replace("\xa0","").replace('\u3000',"").replace('看了這則新聞的人，也看了……','').replace('\u200b',''))  
-#                        print(local_political_content_list)
-                    else:
-                        pass
-                title_count+=1
-            elif b == "娛樂":
-                alternative_entertainment = news_list.a['href'].strip("/")[11:]
-                print(alternative_entertainment)
-                href="https://tw." + alternative_entertainment
+#                 #找title ,content丟入list中
+#                 for i in bsObj.findAll("article"):
+#                     # print(i)
+#                     if i.h1 != None:
+#                         local_political_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
+# #                        print(local_political_title_list)
+#                         print("\n\n")
+#                 #scraping content
+#                 for i in bsObj.findAll("div",{'class':'ndArticle_margin'}):
+#                     if i.p!=None:
+#                         local_political_content_list.append(i.p.get_text().replace("\xa0","").replace('\u3000',"").replace('看了這則新聞的人，也看了……','').replace('\u200b',''))  
+# #                        print(local_political_content_list)
+#                     else:
+#                         pass
+#                 title_count+=1
+#             elif b == "娛樂":
+#                 alternative_entertainment = news_list.a['href'].strip("/")[11:]
+#                 print(alternative_entertainment)
+#                 href="https://tw." + alternative_entertainment
                 
-#                print(href)
-                html2 = urlopen(href)
+# #                print(href)
+#                 html2 = urlopen(href)
 
-                #去除廣告
-                # ad_clear('//div[@id="tenmax-cover-shrink"]')
-                bsObj = BeautifulSoup(html2, 'html.parser')
-                # print(bsObj)
+#                 #去除廣告
+#                 # ad_clear('//div[@id="tenmax-cover-shrink"]')
+#                 bsObj = BeautifulSoup(html2, 'html.parser')
+#                 # print(bsObj)
                 
-                #找title ,content丟入list中
-                for i in bsObj.findAll("article"):
-                    # print(i)
-                    if i.h1 != None:
-                        local_entertainment_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
-#                        print(local_political_title_list)
-                        print("\n\n")
-                #scraping content
-                for i in bsObj.findAll("div",{'class':'ndArticle_margin'}):
-                    if i.p!=None:
-                        local_entertainment_content_list.append(i.p.get_text().replace("\xa0","").replace('\u3000',"").replace('看了這則新聞的人，也看了……','').replace('\u200b',''))  
-#                        print(local_political_content_list)
-                    else:
-                        pass
-                title_count+=1
+#                 #找title ,content丟入list中
+#                 for i in bsObj.findAll("article"):
+#                     # print(i)
+#                     if i.h1 != None:
+#                         local_entertainment_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
+# #                        print(local_political_title_list)
+#                         print("\n\n")
+#                 #scraping content
+#                 for i in bsObj.findAll("div",{'class':'ndArticle_margin'}):
+#                     if i.p!=None:
+#                         local_entertainment_content_list.append(i.p.get_text().replace("\xa0","").replace('\u3000',"").replace('看了這則新聞的人，也看了……','').replace('\u200b',''))  
+# #                        print(local_political_content_list)
+#                     else:
+#                         pass
+#                 title_count+=1
         else:#跑完新聞後，回至首頁,跳出迴圈繼續下面。
             break
     html_count=str(count+1)
@@ -139,8 +137,10 @@ while count<=1:
     # print(html_count)
     count+=1
 
-def apple_crawd_now():
-    return local_href_dictionary
+def return_social_title():
+    return local_title_list
+def return_social_href():
+    return local_href_list
 # ----- write to .csv -----
 # df = pd.DataFrame({'title':local_title_list,'content':local_content_list})
 # df_political = pd.DataFrame({'title':local_political_title_list,'content':local_political_content_list})
