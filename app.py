@@ -47,8 +47,8 @@ def handle_text_message(event):                  # default
     social_title = apple_crawd.return_social_title()
     social_href = apple_crawd.return_social_href()
  
-    single_push(profile.user_id,social_title)
-    single_push(profile.user_id,social_href)
+    single_push(profile.user_id,social_title[0])
+    single_push(profile.user_id,social_href[0])
 
         
     
