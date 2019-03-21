@@ -35,7 +35,7 @@ local_entertainment_content_list = []
 
 
 # count = 爬蟲頁數
-while count<=3:
+while count<=1:
     
     #找到title 共有幾篇
     for i in soup.findAll("ul",{'class':'rtddd slvl'}):

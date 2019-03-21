@@ -1,6 +1,6 @@
 # encoding: utf-8
 from flask import Flask, request, abort
-from apple_crawd import apple_crawd_now
+# from apple_crawd import apple_crawd_now
 from linebot import (
     LineBotApi, WebhookHandler
 )
