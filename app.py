@@ -46,9 +46,12 @@ def handle_text_message(event):                  # default
     profile = line_bot_api.get_profile(event.source.user_id)
     social_title = apple_crawd.return_social_title()
     social_href = apple_crawd.return_social_href()
-    for i in range(2):
-        single_push(profile.user_id,social_title[i])
-        single_push(profile.user_id,social_href[i])
+    if msg == "社會":
+        for i in range(2):
+            single_push(profile.user_id,social_title[i])
+            single_push(profile.user_id,social_href[i])
+    else:
+        single_push(profile.user_id,"暫時無這類別資訊")
     
 
         
