@@ -51,7 +51,7 @@ while count<=1:
     soup = BeautifulSoup(html, 'html.parser')
     for news_list in soup.findAll("li",{'class':'rtddt'}): 
         # if title_count < len(title_list): 
-        if title_count < 5:
+        if title_count < 2:
             b=str(news_list.h2)
             b = b[4:6]
             if b == "社會":
