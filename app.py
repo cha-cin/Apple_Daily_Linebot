@@ -50,6 +50,7 @@ def handle_text_message(event):                  # default
         #跑社會類別
         single_push(profile.user_id,"test")
         apple_crawd.app_social_fun()
+        single_push(profile.user_id,"test2")
         social_title = apple_crawd.local_title_list
         social_href = apple_crawd.local_href_list
         for i in range(len(social_title)):
@@ -57,6 +58,7 @@ def handle_text_message(event):                  # default
             single_push(profile.user_id,social_href[i])
         social_title = []
         social_href = []
+        single_push(profile.user_id,"test3")
     elif msg == "政治":
         #跑政治類別
         apple_crawd.app_political_fun()
