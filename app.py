@@ -54,23 +54,22 @@ def handle_text_message(event):                  # default
 
     
     if msg == "社會":
-        social_title = []
-        social_href = []
         social_title = apple_crawd.local_title_list
         social_href = apple_crawd.local_href_list
         for i in range(2):
             single_push(profile.user_id,social_title[i])
             single_push(profile.user_id,social_href[i])
+        social_title = []
+        social_href = []
     elif msg == "政治":
         single_push(profile.user_id,"test")
-        political_title = []
-        political_href = []
         political_title = apple_crawd.local_political_title_list
         political_href = apple_crawd.local_political_href_list
-
         for i in range(1):
             single_push(profile.user_id,political_title[i])
             single_push(profile.user_id,political_href[i])
+        political_title = []
+        political_href = []
     else:
         single_push(profile.user_id,"暫時無這類別資訊")
     
