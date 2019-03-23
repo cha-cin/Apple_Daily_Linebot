@@ -25,13 +25,13 @@ soup = BeautifulSoup(html,'html.parser')
 title_list=[]
 count=0
 local_title_list=[]
-local_content_list=[]
 local_href_list = []
 local_political_title_list = []
+local_political_href_list=[]
 local_entertainment_title_list=[]
 local_entertainment_content_list = []
 
-local_political_href_list=[]
+
 
 
 
@@ -45,9 +45,7 @@ def app_social_fun():
     global title_list
     global local_title_list
     global local_href_list 
-    global local_political_content_list 
-    global local_entertainment_title_list
-    global local_entertainment_content_list 
+
     
     while count<=1:
         
