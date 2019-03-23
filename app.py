@@ -48,6 +48,7 @@ def handle_text_message(event):                  # default
     
     if msg == "社會":
         #跑社會類別
+        single_push(profile.user_id,"test")
         apple_crawd.app_social_fun()
         social_title = apple_crawd.local_title_list
         social_href = apple_crawd.local_href_list
