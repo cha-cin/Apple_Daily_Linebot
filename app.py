@@ -45,14 +45,9 @@ def handle_text_message(event):                  # default
     msg = event.message.text #message from user
     
     profile = line_bot_api.get_profile(event.source.user_id)
-    
+    ac.app_social_fun()
     
     if msg == "社會":
-        import apple_crawd as ac
-        #跑社會類別
-        single_push(profile.user_id,"test")
-        time.sleep(2)
-        ac.app_social_fun()
         single_push(profile.user_id,"test2")
         social_title = ac.local_title_list
         social_href = ac.local_href_list
@@ -63,11 +58,6 @@ def handle_text_message(event):                  # default
         social_href = []
         single_push(profile.user_id,"test3")
     elif msg == "政治":
-        import apple_crawd as ac
-        #跑政治類別
-        single_push(profile.user_id,"test4")
-        time.sleep(2)
-        ac.app_political_fun()
         single_push(profile.user_id,"test5")
         political_title = ac.local_political_title_list
         political_href = ac.local_political_href_list
