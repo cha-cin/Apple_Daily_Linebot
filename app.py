@@ -44,8 +44,9 @@ def handle_text_message(event):                  # default
     msg = event.message.text #message from user
     
     profile = line_bot_api.get_profile(event.source.user_id)
-    social_title = apple_crawd.return_social_title()
-    social_href = apple_crawd.return_social_href()
+    apple_crawd.app_fun()
+    social_title = apple_crawd.local_title_list
+    social_href = apple_crawd.local_href_list
     if msg == "社會":
         for i in range(2):
             single_push(profile.user_id,social_title[i])
