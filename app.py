@@ -48,7 +48,6 @@ def handle_text_message(event):                  # default
     ac.app_social_fun()
     
     if msg == "社會":
-        single_push(profile.user_id,"test2")
         social_title = ac.local_title_list
         social_href = ac.local_href_list
         for i in range(len(social_title)):
@@ -56,9 +55,7 @@ def handle_text_message(event):                  # default
             single_push(profile.user_id,social_href[i])
         social_title = []
         social_href = []
-        single_push(profile.user_id,"test3")
     elif msg == "政治":
-        single_push(profile.user_id,"test5")
         political_title = ac.local_political_title_list
         political_href = ac.local_political_href_list
         for i in range(len(political_title)):
@@ -66,7 +63,14 @@ def handle_text_message(event):                  # default
             single_push(profile.user_id,political_href[i])
         political_title = []
         political_href = []
-        single_push(profile.user_id,"test6")
+    elif msg == "政治":
+        national_title = ac.local_national_title_list
+        national_href = ac.local_national_href_list
+        for i in range(len(national_title)):
+            single_push(profile.user_id,national_title[i])
+            single_push(profile.user_id,national_href[i])
+        national_title = []
+        national_href = []
     else:
         single_push(profile.user_id,"暫時無這類別資訊")
     
