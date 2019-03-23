@@ -34,6 +34,8 @@ local_national_title_list=[]
 local_national_href_list=[]
 local_life_title_list=[]
 local_life_href_list=[]
+local_sports_title_list=[]
+local_sports_href_list=[]
 
 
 
@@ -58,6 +60,9 @@ def app_social_fun():
 
     global local_life_title_list
     global local_life_href_list
+
+    global local_sports_title_list
+    global local_sports_href_list
 
     
     while count<=1:
@@ -151,6 +156,21 @@ def app_social_fun():
                         # print(i)
                         if i.h1 != None:
                             local_life_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
+                    title_count+=1
+                elif b == "體育":
+                    href="https://tw."+news_list.a['href'].strip("/")[11:]
+                    local_sports_href_list.append(href)
+                    html2 = urlopen(href)
+
+                    #去除廣告
+                    # ad_clear('//div[@id="tenmax-cover-shrink"]')
+                    bsObj = BeautifulSoup(html2, 'html.parser')
+                    # print(bsObj)                  
+                #    找title ,content丟入list中
+                    for i in bsObj.findAll("article"):
+                        # print(i)
+                        if i.h1 != None:
+                            local_sports_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
                     title_count+=1
             else:#跑完新聞後，回至首頁,跳出迴圈繼續下面。
                 break
