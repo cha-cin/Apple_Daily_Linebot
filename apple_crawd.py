@@ -37,6 +37,9 @@ local_entertainment_content_list = []
 
 # count = 爬蟲頁數
 def app_fun():
+    global count
+    global soup
+    global html
     while count<=1:
         
         #找到title 共有幾篇
