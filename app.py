@@ -63,7 +63,7 @@ def handle_text_message(event):                  # default
             single_push(profile.user_id,political_href[i])
         political_title = []
         political_href = []
-    elif msg == "政治":
+    elif msg == "國際":
         national_title = ac.local_national_title_list
         national_href = ac.local_national_href_list
         for i in range(len(national_title)):

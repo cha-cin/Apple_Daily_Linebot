@@ -99,7 +99,7 @@ def app_social_fun():
                         if i.h1 != None:
                             local_political_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
                     title_count+=1
-                 elif b == "國際":
+                elif b == "國際":
                     href="https://tw.news."+news_list.a['href'].strip("/")[16:]
                     local_national_href_list.append(href)
                     html2 = urlopen(href)
@@ -114,7 +114,7 @@ def app_social_fun():
                         if i.h1 != None:
                             local_national_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
                     title_count+=1
-                    
+
             else:#跑完新聞後，回至首頁,跳出迴圈繼續下面。
                 break
         html_count=str(count+1)
