@@ -1,6 +1,7 @@
 # encoding: utf-8
 from flask import Flask, request, abort
 import apple_crawd
+import time
 from linebot import (
     LineBotApi, WebhookHandler
 )
