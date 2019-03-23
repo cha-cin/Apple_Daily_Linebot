@@ -71,6 +71,14 @@ def handle_text_message(event):                  # default
             single_push(profile.user_id,national_href[i])
         national_title = []
         national_href = []
+    elif msg == "娛樂":
+        entertainment_title = ac.local_entertainment_title_list
+        entertainment_href = ac.local_entertainment_href_list
+        for i in range(len(national_title)):
+            single_push(profile.user_id,entertainment_title[i])
+            single_push(profile.user_id,entertainment_href[i])
+        entertainment_title = []
+        entertainment_href = []
     else:
         single_push(profile.user_id,"暫時無這類別資訊")
     
