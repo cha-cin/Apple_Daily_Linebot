@@ -44,10 +44,24 @@ def handle_text_message(event):                  # default
     msg = event.message.text #message from user
     
     profile = line_bot_api.get_profile(event.source.user_id)
-    apple_crawd.app_fun()
-    social_title = apple_crawd.local_title_list
-    social_href = apple_crawd.local_href_list
+    #跑社會類別
+    apple_crawd.app_social_fun()
+    
+
+    #跑政治類別
+    apple_crawd.app_political_fun()
+    
+
+    
     if msg == "社會":
+        social_title = apple_crawd.local_title_list
+        social_href = apple_crawd.local_href_list
+        for i in range(2):
+            single_push(profile.user_id,social_title[i])
+            single_push(profile.user_id,social_href[i])
+    elif msg == "政治":
+        social_title = apple_crawd.local_political_title_list
+        social_href = apple_crawd.local_political_href_list
         for i in range(2):
             single_push(profile.user_id,social_title[i])
             single_push(profile.user_id,social_href[i])
