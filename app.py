@@ -48,6 +48,7 @@ def handle_text_message(event):                  # default
     
     
     if msg == "社會":
+        import apple_crawd as ac
         #跑社會類別
         single_push(profile.user_id,"test")
         time.sleep(2)
@@ -62,6 +63,7 @@ def handle_text_message(event):                  # default
         social_href = []
         single_push(profile.user_id,"test3")
     elif msg == "政治":
+        import apple_crawd as ac
         #跑政治類別
         single_push(profile.user_id,"test4")
         time.sleep(2)
