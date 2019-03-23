@@ -118,7 +118,6 @@ def app_social_fun():
                             local_national_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
                     title_count+=1
                 elif b == "娛樂":
-                    print(news_list)
                     href="https://tw."+news_list.a['href'].strip("/")[11:]
                     local_entertainment_href_list.append(href)
                     html2 = urlopen(href)
