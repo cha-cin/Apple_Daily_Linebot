@@ -1,7 +1,6 @@
 # encoding: utf-8
 from flask import Flask, request, abort
-# import apple_crawd
-from apple_crawd import *
+import apple_crawd as ac
 import time
 from linebot import (
     LineBotApi, WebhookHandler
@@ -52,10 +51,10 @@ def handle_text_message(event):                  # default
         #跑社會類別
         single_push(profile.user_id,"test")
         time.sleep(2)
-        apple_crawd.app_social_fun()
+        ac.app_social_fun()
         single_push(profile.user_id,"test2")
-        social_title = apple_crawd.local_title_list
-        social_href = apple_crawd.local_href_list
+        social_title = ac.local_title_list
+        social_href = ac.local_href_list
         for i in range(len(social_title)):
             single_push(profile.user_id,social_title[i])
             single_push(profile.user_id,social_href[i])
@@ -66,10 +65,10 @@ def handle_text_message(event):                  # default
         #跑政治類別
         single_push(profile.user_id,"test4")
         time.sleep(2)
-        apple_crawd.app_political_fun()
+        ac.app_political_fun()
         single_push(profile.user_id,"test5")
-        political_title = apple_crawd.local_political_title_list
-        political_href = apple_crawd.local_political_href_list
+        political_title = ac.local_political_title_list
+        political_href = ac.local_political_href_list
         for i in range(len(political_title)):
             single_push(profile.user_id,political_title[i])
             single_push(profile.user_id,political_href[i])
