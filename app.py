@@ -49,6 +49,7 @@ def handle_text_message(event):                  # default
     if msg == "社會":
         #跑社會類別
         single_push(profile.user_id,"test")
+        time.sleep(2)
         apple_crawd.app_social_fun()
         single_push(profile.user_id,"test2")
         social_title = apple_crawd.local_title_list
@@ -62,6 +63,7 @@ def handle_text_message(event):                  # default
     elif msg == "政治":
         #跑政治類別
         single_push(profile.user_id,"test4")
+        time.sleep(2)
         apple_crawd.app_political_fun()
         single_push(profile.user_id,"test5")
         political_title = apple_crawd.local_political_title_list
