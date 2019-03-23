@@ -62,12 +62,13 @@ def handle_text_message(event):                  # default
             single_push(profile.user_id,social_title[i])
             single_push(profile.user_id,social_href[i])
     elif msg == "政治":
+        single_push(profile.user_id,"test")
         political_title = []
         political_href = []
         political_title = apple_crawd.local_political_title_list
         political_href = apple_crawd.local_political_href_list
 
-        for i in range(len(political_title)):
+        for i in range(1):
             single_push(profile.user_id,political_title[i])
             single_push(profile.user_id,political_href[i])
     else:

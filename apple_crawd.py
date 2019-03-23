@@ -83,8 +83,7 @@ def app_social_fun():
                         if i.h1 != None:
                             local_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
                     title_count+=1
-                
-                    title_count+=1
+            
             else:#跑完新聞後，回至首頁,跳出迴圈繼續下面。
                 break
         html_count=str(count+1)
@@ -138,7 +137,6 @@ def app_political_fun():
                             local_political_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
                     title_count+=1
                 
-                    title_count+=1
             else:#跑完新聞後，回至首頁,跳出迴圈繼續下面。
                 break
         html_count=str(count+1)
