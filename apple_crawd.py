@@ -81,9 +81,7 @@ def app_fun():
                     for i in bsObj.findAll("article"):
                         # print(i)
                         if i.h1 != None:
-                            # local_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
-                            
-                            local_href_dictionary = {i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""),href}             
+                            local_title_list.append(i.h1.get_text().replace("\xa0","").replace('\u3000',"").replace("\xa0","").replace("\u200b",""))
                     title_count+=1
                 elif b == "政治":
                     alternative = news_list.a['href'].strip("/")[16:]
