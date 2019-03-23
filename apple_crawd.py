@@ -69,7 +69,7 @@ def app_fun():
                 b = b[4:6]
                 if b == "社會":
                     href="https://tw.news."+news_list.a['href'].strip("/")[16:]
-    #                print(href)
+                    local_href_list.append(href)
                     html2 = urlopen(href)
 
                     #去除廣告
