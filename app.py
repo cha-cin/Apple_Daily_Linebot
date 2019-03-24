@@ -46,6 +46,42 @@ def handle_text_message(event):                  # default
     
     profile = line_bot_api.get_profile(event.source.user_id)
     ac.app_social_fun()
+    if msg == "新聞類別":
+        buttons_template = TemplateSendMessage(
+        alt_text='Buttons Template',
+        template=ButtonsTemplate(
+            title='新聞類別',
+            text='請選擇您想得知的最新新聞類別',
+            # thumbnail_image_url='顯示在開頭的大圖片網址',
+            actions=[
+                MessageTemplateAction(
+                    label='社會',
+                    text='社會'
+                ),
+                MessageTemplateAction(
+                    label='政治',
+                    text='政治'
+                ),
+                MessageTemplateAction(
+                    label='國際',
+                    text='國際'
+                ),
+                MessageTemplateAction(
+                    label='娛樂',
+                    text='娛樂'
+                ),
+                MessageTemplateAction(
+                    label='生活',
+                    text='生活'
+                ),
+                MessageTemplateAction(
+                    label='體育',
+                    text='體育'
+                )
+            ]
+        )
+    )
+    
     
     if msg == "社會":
         social_title = ac.local_title_list
