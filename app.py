@@ -10,7 +10,13 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
+    TemplateSendMessage,ButtonsTemplate,
+    PostbackAction, MessageAction,
+    URIAction, DatetimePickerAction,
+    ConfirmTemplate, CarouselTemplate, CarouselColumn,
+    ImageCarouselTemplate, ImageCarouselColumn
 )
+
 
 app = Flask(__name__)
 
@@ -47,43 +53,9 @@ def handle_text_message(event):                  # default
     profile = line_bot_api.get_profile(event.source.user_id)
     ac.app_social_fun()
     if msg == "新聞類別":
-        buttons_template = TemplateSendMessage(
-        alt_text='Buttons Template',
-        template=ButtonsTemplate(
-            title='新聞類別',
-            text='請選擇您想得知的最新新聞類別',
-            # thumbnail_image_url='顯示在開頭的大圖片網址',
-            actions=[
-                MessageTemplateAction(
-                    label='社會',
-                    text='社會'
-                ),
-                MessageTemplateAction(
-                    label='政治',
-                    text='政治'
-                ),
-                MessageTemplateAction(
-                    label='國際',
-                    text='國際'
-                ),
-                MessageTemplateAction(
-                    label='娛樂',
-                    text='娛樂'
-                ),
-                MessageTemplateAction(
-                    label='生活',
-                    text='生活'
-                ),
-                MessageTemplateAction(
-                    label='體育',
-                    text='體育'
-                )
-            ]
-        )
-    )
-    
-    
-    if msg == "社會":
+        buttletemplate(profile.user_id)
+        buttletemplate2(profile.user_id)
+    elif msg == "社會":
         social_title = ac.local_title_list
         social_href = ac.local_href_list
         for i in range(len(social_title)):
@@ -146,7 +118,56 @@ def handle_text_message(event):                  # default
 # ================= 機器人區塊 End =================
 
 def single_push(id, msg):
+
     line_bot_api.push_message(id, TextSendMessage(text=msg))
+def buttletemplate(id):
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        # thumbnail_image_url='https://example.com/image.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[
+            MessageAction(
+                label='社會',
+                text='社會'
+            ),
+            MessageAction(
+                label='政治',
+                text='政治'
+            ),
+            MessageAction(
+                label='國際',
+                text='國際'
+            ),
+            MessageAction(
+                label='娛樂',
+                text='娛樂'
+            )
+        ]
+    )
+    )
+    line_bot_api.push_message(id,message)
+def buttletemplate2(id):
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        # thumbnail_image_url='https://example.com/image.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[
+            MessageAction(
+                label='生活',
+                text='生活'
+            ),
+            MessageAction(
+                label='體育',
+                text='體育'
+            )
+        ]
+    )
+    )
+    line_bot_api.push_message(id,message)
 
 import os
 if __name__ == "__main__":
