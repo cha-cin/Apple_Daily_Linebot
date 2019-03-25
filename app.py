@@ -1,6 +1,7 @@
 # encoding: utf-8
 from flask import Flask, request, abort
 import apple_crawd as ac
+import immidiate_weather as im
 import time
 from linebot import (
     LineBotApi, WebhookHandler
@@ -55,6 +56,12 @@ def handle_text_message(event):                  # default
     if msg == "新聞類別":
         buttletemplate(profile.user_id)
         buttletemplate2(profile.user_id)
+    elif msg == "氣象":
+        buttletemplate_weather_north(profile.user_id)
+        buttletemplate_weather_middle(profile.user_id)
+        buttletemplate_weather_south(profile.user_id)
+        buttletemplate_weather_south2(profile.user_id)
+        buttletemplate_weather_east(profile.user_id)
     elif msg == "社會":
         social_title = ac.local_title_list
         social_href = ac.local_href_list
@@ -103,6 +110,14 @@ def handle_text_message(event):                  # default
             single_push(profile.user_id,sports_href[i])
         sports_title = []
         sports_href = []
+    elif (msg == "基隆市" or msg == "新北市" or msg == "臺北市" or msg == "桃園市" or msg == "臺中市" or msg == "新竹市" or msg == "新竹縣" or msg == "苗栗縣" or msg == "嘉義市" or msg == "嘉義縣" or msg == "雲林縣" or msg == "南投縣"
+    or msg == "臺南市" or msg == "高雄縣" or msg == "屏東縣" or msg == "彰化縣" or msg == "宜蘭縣" or msg == "花蓮縣" or msg == "臺東縣"):
+        im.city(msg)
+        time.sleep(2)
+        single_push(profile.user_id,im.title)
+        single_push(profile.user_id,"時間 : "+im.weather_time+"\n"+"溫度 : "+im.weather_temperature+"\n"+"天氣狀況 : "+im.weather_situation+"\n"+"舒適度 : "+im.weather_feel+"\n"+"降雨機率 (%)   : "+im.weather_rain)
+        single_push(profile.user_id,"時間 : "+im.weather_tonight_time+"\n"+"溫度 : "+im.weather_tonight_temperature+"\n"+"天氣狀況 : "+im.weather_tonight_situation+"\n"+"舒適度 : "+im.weather_tonight_feel+"\n"+"降雨機率 (%)   : "+im.weather_tonight_rain)
+        single_push(profile.user_id,"時間 : "+im.weather_tomorrow_time+"\n"+"溫度 : "+im.weather_tomorrow_temperature+"\n"+"天氣狀況 : "+im.weather_tomorrow_situation+"\n"+"舒適度 : "+im.weather_tomorrow_feel+"\n"+"降雨機率 (%)   : "+im.weather_tomorrow_rain)
     else:
         single_push(profile.user_id,"暫時無這類別資訊")
     
@@ -163,6 +178,143 @@ def buttletemplate2(id):
             MessageAction(
                 label='體育',
                 text='體育'
+            )
+        ]
+    )
+    )
+    line_bot_api.push_message(id,message)
+
+def buttletemplate_weather_north(id):
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        # thumbnail_image_url='https://example.com/image.jpg',
+        title='北部縣市',
+        text='Please select',
+        actions=[
+            MessageAction(
+                label='臺北市',
+                text='臺北市'
+            ),
+            MessageAction(
+                label='新北市',
+                text='新北市'
+            ),
+            MessageAction(
+                label='桃園市',
+                text='桃園市'
+            ),
+            MessageAction(
+                label='基隆市',
+                text='基隆市'
+            )
+        ]
+    )
+    )
+    line_bot_api.push_message(id,message)
+def buttletemplate_weather_middle(id):
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        # thumbnail_image_url='https://example.com/image.jpg',
+        title='中北部縣市',
+        text='Please select',
+        actions=[
+            MessageAction(
+                label='臺中市',
+                text='臺中市'
+            ),
+            MessageAction(
+                label='新竹市',
+                text='新竹市'
+            ),
+            MessageAction(
+                label='新竹縣',
+                text='新竹縣'
+            ),
+            MessageAction(
+                label='苗栗縣',
+                text='苗栗縣'
+            )
+        ]
+    )
+    )
+    line_bot_api.push_message(id,message)
+def buttletemplate_weather_south(id):
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        # thumbnail_image_url='https://example.com/image.jpg',
+        title='中部縣市',
+        text='Please select',
+        actions=[
+            MessageAction(
+                label='雲林縣',
+                text='雲林縣'
+            ),
+            MessageAction(
+                label='嘉義市',
+                text='嘉義市'
+            ),
+            MessageAction(
+                label='南投縣',
+                text='南投縣'
+            ),
+            MessageAction(
+                label='彰化縣',
+                text='彰化縣'
+            )
+        ]
+    )
+    )
+    line_bot_api.push_message(id,message)
+def buttletemplate_weather_south2(id):
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        # thumbnail_image_url='https://example.com/image.jpg',
+        title='南部縣市',
+        text='Please select',
+        actions=[
+            MessageAction(
+                label='臺南市',
+                text='臺南市'
+            ),
+            MessageAction(
+                label='高雄市',
+                text='高雄市'
+            ),
+            MessageAction(
+                label='屏東縣',
+                text='屏東縣'
+            ),
+            MessageAction(
+                label='嘉義縣',
+                text='嘉義縣'
+            ),
+        ]
+    )
+    )
+    line_bot_api.push_message(id,message)
+def buttletemplate_weather_east(id):
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        # thumbnail_image_url='https://example.com/image.jpg',
+        title='東部縣市',
+        text='Please select',
+        actions=[
+            MessageAction(
+                label='宜蘭縣',
+                text='宜蘭縣'
+            ),
+            MessageAction(
+                label='花蓮縣',
+                text='花蓮縣'
+            ),
+            MessageAction(
+                label='臺東縣',
+                text='臺東縣'
             )
         ]
     )
