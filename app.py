@@ -2,6 +2,8 @@
 from flask import Flask, request, abort
 import apple_crawd as ac
 import immidiate_weather as im
+import weatherCarouselTemplate as wct
+import sogo_food_parser as sfp
 import time
 from linebot import (
     LineBotApi, WebhookHandler
@@ -52,17 +54,23 @@ def handle_text_message(event):                  # default
     msg = event.message.text #message from user
     
     profile = line_bot_api.get_profile(event.source.user_id)
-    ac.app_social_fun()
+    
     if msg == "新聞類別":
         buttletemplate(profile.user_id)
         buttletemplate2(profile.user_id)
     elif msg == "氣象":
+        select_weather_area(profile.user_id)
+    elif msg == "北部":
         buttletemplate_weather_north(profile.user_id)
+    elif msg == "中部":
         buttletemplate_weather_middle(profile.user_id)
+    elif msg == "南部":
         buttletemplate_weather_south(profile.user_id)
         buttletemplate_weather_south2(profile.user_id)
+    elif msg == "東部":
         buttletemplate_weather_east(profile.user_id)
     elif msg == "社會":
+        ac.app_social_fun()
         social_title = ac.local_title_list
         social_href = ac.local_href_list
         for i in range(len(social_title)):
@@ -71,6 +79,7 @@ def handle_text_message(event):                  # default
         social_title = []
         social_href = []
     elif msg == "政治":
+        ac.app_social_fun()
         political_title = ac.local_political_title_list
         political_href = ac.local_political_href_list
         for i in range(len(political_title)):
@@ -79,6 +88,7 @@ def handle_text_message(event):                  # default
         political_title = []
         political_href = []
     elif msg == "國際":
+        ac.app_social_fun()
         national_title = ac.local_national_title_list
         national_href = ac.local_national_href_list
         for i in range(len(national_title)):
@@ -87,6 +97,7 @@ def handle_text_message(event):                  # default
         national_title = []
         national_href = []
     elif msg == "娛樂":
+        ac.app_social_fun()
         entertainment_title = ac.local_entertainment_title_list
         entertainment_href = ac.local_entertainment_href_list
         for i in range(len(entertainment_title)):
@@ -95,6 +106,7 @@ def handle_text_message(event):                  # default
         entertainment_title = []
         entertainment_href = []
     elif msg == "生活":
+        ac.app_social_fun()
         life_title = ac.local_life_title_list
         life_href = ac.local_life_href_list
         for i in range(len(life_title)):
@@ -103,6 +115,7 @@ def handle_text_message(event):                  # default
         life_title = []
         life_href = []
     elif msg == "體育":
+        ac.app_social_fun()
         sports_title = ac.local_sports_title_list
         sports_href = ac.local_sports_href_list
         for i in range(len(sports_title)):
@@ -115,16 +128,17 @@ def handle_text_message(event):                  # default
         im.city(msg)
         time.sleep(2)
         single_push(profile.user_id,im.title)
-        single_push(profile.user_id,"時間 : "+im.weather_time+"\n"+"溫度 : "+im.weather_temperature+"\n"+"天氣狀況 : "+im.weather_situation+"\n"+"舒適度 : "+im.weather_feel+"\n"+"降雨機率 (%)   : "+im.weather_rain)
-        single_push(profile.user_id,"時間 : "+im.weather_tonight_time+"\n"+"溫度 : "+im.weather_tonight_temperature+"\n"+"天氣狀況 : "+im.weather_tonight_situation+"\n"+"舒適度 : "+im.weather_tonight_feel+"\n"+"降雨機率 (%)   : "+im.weather_tonight_rain)
-        single_push(profile.user_id,"時間 : "+im.weather_tomorrow_time+"\n"+"溫度 : "+im.weather_tomorrow_temperature+"\n"+"天氣狀況 : "+im.weather_tomorrow_situation+"\n"+"舒適度 : "+im.weather_tomorrow_feel+"\n"+"降雨機率 (%)   : "+im.weather_tomorrow_rain)
+        single_push(profile.user_id,"時間 :\n"+im.weather_time+" \n\n\n"+"溫度 : "+im.weather_temperature+"\n"+"天氣狀況 : "+im.weather_situation+"\n"+"舒適度 : "+im.weather_feel+"\n"+"降雨機率 (%)   : "+im.weather_rain)
+        single_push(profile.user_id,"時間 :\n"+im.weather_tonight_time+"\n\n\n"+"溫度 : "+im.weather_tonight_temperature+"\n"+"天氣狀況 : "+im.weather_tonight_situation+"\n"+"舒適度 : "+im.weather_tonight_feel+"\n"+"降雨機率 (%)   : "+im.weather_tonight_rain)
+        single_push(profile.user_id,"時間 :\n"+im.weather_tomorrow_time+"\n\n\n"+"溫度 : "+im.weather_tomorrow_temperature+"\n"+"天氣狀況 : "+im.weather_tomorrow_situation+"\n"+"舒適度 : "+im.weather_tomorrow_feel+"\n"+"降雨機率 (%)   : "+im.weather_tomorrow_rain)
+    elif msg == "美食":
+        sfp.getFoodList()
+        time.sleep(2)
+        for i in range(len(sfp.title_list)):
+            single_push(profile.user_id,sfp.title_list[i]+"\n\n"+sfp.href_list[i])
+            # single_push(profile.user_id,sfp.href_list[i])    
     else:
-        single_push(profile.user_id,"暫時無這類別資訊")
-    
-
-        
-    
-    # single_push(profile.user_id, "test")
+        single_push(profile.user_id,"暫時無這類別資訊")   
 
    
 
@@ -133,6 +147,9 @@ def handle_text_message(event):                  # default
 # ================= 機器人區塊 End =================
 
 def single_push(id, msg):
+
+
+#新聞類別
 
     line_bot_api.push_message(id, TextSendMessage(text=msg))
 def buttletemplate(id):
@@ -178,6 +195,37 @@ def buttletemplate2(id):
             MessageAction(
                 label='體育',
                 text='體育'
+            )
+        ]
+    )
+    )
+    line_bot_api.push_message(id,message)
+
+#氣象選單
+
+def select_weather_area(id):
+    message = TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        # thumbnail_image_url='https://example.com/image.jpg',
+        title='選擇區域',
+        text='Please select',
+        actions=[
+            MessageAction(
+                label='北部',
+                text='北部'
+            ),
+            MessageAction(
+                label='中部',
+                text='中部'
+            ),
+            MessageAction(
+                label='南部',
+                text='南部'
+            ),
+            MessageAction(
+                label='東部',
+                text='東部'
             )
         ]
     )
